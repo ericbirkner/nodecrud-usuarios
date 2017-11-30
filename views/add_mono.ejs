@@ -1,0 +1,26 @@
+<%- include layouts/header.ejs %>
+
+        <div class="page-data">
+
+            <form method="post" action="/monos/add" enctype="multipart/form-data">
+                <table cellpadding="11">
+                 <tr>
+                    <td class="label">Nombre</td><td>: <input type="text" name="nombre" required></td>
+                 </tr>
+                 <tr>
+                    <td class="label" valign="top">Imagen</td><td valign="top">: <input type="file" name="imagen"></td>
+                 </tr>
+                 <tr>
+                    <td class="label"></td>
+                    <td>
+                        &nbsp; <input type="submit" name="submit" value="Save">
+                       <input type="button" name="cancel" value="Cancel" class="cancel" onClick="cancelMonos()">
+                    </td>
+                 </tr>
+
+                </table>
+            </form>
+
+        </div>
+
+<%- include layouts/footer.ejs %>

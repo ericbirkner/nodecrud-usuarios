@@ -1,0 +1,29 @@
+<%- include layouts/header.ejs %>
+
+        <div class="page-data">
+
+            <form method="post" action="/monos/edit/<%=data[0].id%>">
+                <table cellpadding="11">
+                <tr>
+                    <td class="label">Nombre</td><td>: <input type="text" name="name" value="<%=data[0].nombre%>" required></td>
+                 </tr>
+                 <tr>
+                    <td class="label" valign="top">Imagen</td>
+                    <td valign="top">:
+                        <img src="<%=host%>/uploads/<%=data[0].imagen%>">
+                    </td>
+                </tr>
+
+                 <tr>
+                    <td class="label"></td>
+                    <td>
+                        &nbsp; <input type="submit" name="submit" value="Save">
+                       <input type="button" name="cancel" value="Cancel" class="cancel" onClick="cancelAdd()">
+                    </td>
+                 </tr>
+                </table>
+            </form>
+
+        </div>
+
+<%- include layouts/footer.ejs %>

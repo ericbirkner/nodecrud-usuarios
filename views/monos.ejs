@@ -9,7 +9,7 @@
                 <tr>
                     <th width="50px">ID</th>
                     <th>Name</th>
-                    <th width="120px">Acción</th>
+                    <th width="130px">Acción</th>
                 </tr>
 
                 <% if(data.length){
@@ -21,9 +21,9 @@
                     <td><%=data[i].nombre%></td>
 
                     <td>
-                        <a class="a-inside edit" href="../monos/edit/<%=data[i].id%>">Edit</a>
+                        <a class="a-inside edit" href="../monos/edit/<%=data[i].id%>">Editar</a>
 
-                        <a class="a-inside delete" href="../monos/delete/<%=data[i].id%>">Delete</a>
+                        <a class="a-inside delete" href="../monos/delete/<%=data[i].id%>">Borrar</a>
 
                     </td>
                 </tr>

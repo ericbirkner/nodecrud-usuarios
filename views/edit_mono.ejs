@@ -2,15 +2,19 @@
 
         <div class="page-data">
 
-            <form method="post" action="/monos/edit/<%=data[0].id%>">
+            <form method="post" action="/monos/edit/<%=data[0].id%>" enctype="multipart/form-data">
                 <table cellpadding="11">
                 <tr>
-                    <td class="label">Nombre</td><td>: <input type="text" name="name" value="<%=data[0].nombre%>" required></td>
+                    <td class="label">Nombre</td><td>: <input type="text" name="nombre" value="<%=data[0].nombre%>" required></td>
                  </tr>
                  <tr>
                     <td class="label" valign="top">Imagen</td>
                     <td valign="top">:
-                        <img src="<%=host%>/uploads/<%=data[0].imagen%>">
+                        <input type="file" name="imagen">
+                        <% if(data[0].imagen){ %>
+                        <br/>
+                        <img src="<%=host%>/uploads/<%=data[0].imagen%>" width="500" height="auto">
+                        <% } %>
                     </td>
                 </tr>
 

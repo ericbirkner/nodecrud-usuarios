@@ -57,7 +57,7 @@ exports.save = function(req,res){
 
     if (req.files){
 
-      archivo = req.files.imagen.name;
+      archivo = removeSpecialChars(req.files.imagen.name);
       var imagen = req.files.imagen;
       // Use the mv() method to place the file somewhere on your server
       imagen.mv(path+'/public/uploads/'+archivo, function(err) {
@@ -79,8 +79,6 @@ exports.save = function(req,res){
             'imagen' : archivo
         };
 
-
-
         var query = connection.query("INSERT INTO monos set ? ",data, function(err, rows)
         {
 
@@ -99,26 +97,51 @@ exports.save = function(req,res){
 exports.save_edit = function(req,res){
     var input = JSON.parse(JSON.stringify(req.body));
     var id = req.params.id;
+    var path = process.cwd();
+    var archivo = "";
+
+
+
 
     req.getConnection(function (err, connection) {
 
-        var data = {
+        console.log(req.files);
 
-            name    : input.name,
-            address : input.address,
-            email   : input.email,
-            phone   : input.phone
+        if (req.files){
 
-        };
+          archivo = removeSpecialChars(req.files.imagen.name);
+          var imagen = req.files.imagen;
+          // Use the mv() method to place the file somewhere on your server
+          imagen.mv(path+'/public/uploads/'+archivo, function(err) {
+            if (err){
+              //return res.status(500).send(err);
+              console.log('error al subir '+archivo + '/'+err);
+            }else{
+              console.log('se subio: '+archivo);
 
-        connection.query("UPDATE monos set ? WHERE id = ? ",[data,id], function(err, rows)
-        {
+            }
 
+          });
+
+        }
+
+        console.log(archivo);
+        if(archivo != ''){
+          var data = {
+              'nombre' : input.nombre,
+              'imagen' : archivo
+          };
+        }else{
+          var data = {
+              'nombre' : input.nombre
+          };
+        }
+
+        console.log(data);
+        connection.query("UPDATE monos set ? WHERE id = ? ",[data,id], function(err, rows){
           if (err)
               console.log("Error Updating : %s ",err );
-
-          res.redirect('/monos');
-
+              res.redirect('/monos');
         });
 
     });
@@ -143,3 +166,9 @@ exports.delete_customer = function(req,res){
 
      });
 };
+
+function removeSpecialChars(str) {
+  var fileExtension = '.' + str.split('.').pop();
+  str = Math.random().toString(36).substring(7) + new Date().getTime() + fileExtension;
+  return str;
+}
